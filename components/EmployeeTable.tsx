@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { employees } from "@/data/employees";
+import { useEffect, useState } from "react";
+//import { employees } from "@/data/employees";
 import { Employee } from "@/types/employee";
 import Status from "./Status";
 import SearchFilter from "./SearchFilter";
@@ -9,10 +9,17 @@ import Filters from "./Filters";
 import Link from "next/link";
 
 export default function EmployeeTable() {
+  const [mounted, setMounted] = useState(false);
+  const [employees, setEmployees] = useState<Employee[]>([]);
   const [search, setSearch] = useState("");
   const [department, setDepartment] = useState("all");
   const [role, setRole] = useState("all");
   const [status, setStatus] = useState("all");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) return null;
 
   const filteredEmployees = employees.filter((emp: Employee) => {
     const matchSearch =

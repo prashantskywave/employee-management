@@ -1,15 +1,27 @@
-import { employees } from "@/data/employees";
+//import { employees } from "@/data/employees";
 
-export default async function EmployeeProfile({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
-
-  const employee = employees.find(
-    (e) => String(e._id) === String(id)
+async function getEmployee(id: string) {
+  const res = await fetch(
+    `http://localhost:5000/api/employees/${id}`,
+    {
+      cache: "no-store",
+    }
   );
+
+  if (!res.ok) {
+    return null;
+  }
+
+  return res.json();
+}
+export default async function EmployeeProfile({
+params,
+}: {
+  params: { id: string };
+}) {
+  // const { id } = await params;
+
+ const employee = await getEmployee(params.id);
 
   if (!employee) {
     return <p className="p-6">Employee not found</p>;
