@@ -1,5 +1,3 @@
-
-
 async function getEmployee(id: string) {
   const res = await fetch(
     `http://localhost:5000/api/employees/${id}`,

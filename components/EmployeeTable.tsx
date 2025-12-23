@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-//import { employees } from "@/data/employees";
 import { Employee } from "@/types/employee";
 import Status from "./Status";
 import SearchFilter from "./SearchFilter";
