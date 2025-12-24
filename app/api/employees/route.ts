@@ -2,18 +2,18 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const response = await fetch("http://localhost:5000/api/employees", {
+    const res = await fetch("http://localhost:5000/api/employees", {
       cache: "no-store",
     });
 
-    if (!response.ok) {
+    if (!res.ok) {
       return NextResponse.json(
         { error: "Failed to fetch employees" },
-        { status: 500 }
+        { status: res.status }
       );
     }
 
-    const data = await response.json();
+    const data = await res.json();
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(
